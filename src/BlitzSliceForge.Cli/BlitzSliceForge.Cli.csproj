@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!--Tool properties-->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>bsf</ToolCommandName>           
+    <PackageOutputPath>..\..\pack</PackageOutputPath>
+    <Version>0.0.1-mvp</Version>
+    <Authors>A. Blasco</Authors>
+    <Description>Fast .NET scaffolder for Blazor + CQRS + Vertical Slice Architecture solutions</Description>
+    <PackageId>BlitzSliceForge.Cli</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
+    <PackageReference Include="System.CommandLine" Version="2.0.2" />
+    <PackageReference Include="Scriban" Version="6.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\Common\Directory.Build.props">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Common\global.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Common\README-Template.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

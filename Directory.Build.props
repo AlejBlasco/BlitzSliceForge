@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Configuración global para todos los proyectos -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
+     </PropertyGroup>
+   </Project>

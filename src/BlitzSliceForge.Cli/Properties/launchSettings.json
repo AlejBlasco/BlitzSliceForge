@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BlitzSliceForge.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "--name MiProyectoPrueba --output C:\\Temp\\MiProyecto"
+    }
+  }
+}
