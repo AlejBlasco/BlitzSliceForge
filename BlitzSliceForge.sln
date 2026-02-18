@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlitzSliceForge.Cli.Tests", "tests\BlitzSliceForge.Cli.Tests\BlitzSliceForge.Cli.Tests.csproj", "{624C1405-FB7F-4308-85FE-ABB22E845BA4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,5 +57,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{545FB1BA-CB98-40A1-BE8A-5001E20B5EBA} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{624C1405-FB7F-4308-85FE-ABB22E845BA4} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48E5F562-6612-4B21-937F-3557335021C7}
 	EndGlobalSection
 EndGlobal
