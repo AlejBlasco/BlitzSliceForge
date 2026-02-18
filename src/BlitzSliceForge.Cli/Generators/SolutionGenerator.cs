@@ -1,5 +1,6 @@
 ﻿using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
+using BlitzSliceForge.Cli.Templates.Project;
 
 namespace BlitzSliceForge.Cli.Generators;
 
@@ -29,7 +30,7 @@ public class SolutionGenerator
             Directory.CreateDirectory(options.OutputDirectory!);
 
         // Generate the solution file
-        await cliService.RunAsync("dotnet new sln -n " + options.SolutionName, options.OutputDirectory!);
+        await cliService.RunAsync($"dotnet new sln -n {options.SolutionName}", options.OutputDirectory!);
 
         // Generate principal folders
         GeneratePrincipalFolders(options.OutputDirectory!);
@@ -64,6 +65,9 @@ public class SolutionGenerator
         await templateRenderer.RenderAndSaveAsync(Path.Combine(commonTemplatesPath, "Directory.Build.props"),
             Path.Combine(options.OutputDirectory!, "Directory.Build.props"), null, ct);
 
+        await templateRenderer.RenderAndSaveAsync(Path.Combine(commonTemplatesPath, ".gitignore"),
+            Path.Combine(options.OutputDirectory!, ".gitignore"), null, ct);
+
         await templateRenderer.RenderAndSaveAsync(Path.Combine(commonTemplatesPath, "README-Template.md"),
             Path.Combine(options.OutputDirectory!, "README.md"),
              new Dictionary<string, object>
@@ -76,17 +80,23 @@ public class SolutionGenerator
     private async Task GenerateProjetcs(GenerationOptions options, CancellationToken ct = default)
     {
         // Minimun projects
-        var projects = new List<ProjectGenerationOptions>
-        {
-            new ProjectGenerationOptions(options.SolutionName, "Domain", "classlib", options.OutputDirectory!, false, null),
-            new ProjectGenerationOptions(options.SolutionName, "Application", "classlib", options.OutputDirectory!, false, null),
-            new ProjectGenerationOptions(options.SolutionName, "Infrastructure", "classlib", options.OutputDirectory!, false, null),
-            //new ProjectGenerationOptions(options.SolutionName, "Web", "blazor", options.OutputDirectory!, false, "--interactivity Auto"),
-        };
-
+        var projects = ProjectTemplate.GetAvailableProjects(options);
         foreach (var project in projects)
         {
             await projectGenerator.CreateProjectAsync(project, ct);
         }
+
+        // Linking projects to others   
+        var applicationProject = projects.FirstOrDefault(p => p.Suffix == "Application");
+        var domainProject = projects.FirstOrDefault(p => p.Suffix == "Domain");
+        var infrastructureProject = projects.FirstOrDefault(p => p.Suffix == "Infrastructure");
+
+        if (applicationProject != null && domainProject != null)
+            await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, applicationProject.FullProjectPath, domainProject.FullProjectPath, ct);
+        if (applicationProject != null && infrastructureProject != null)
+            await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, applicationProject.FullProjectPath, infrastructureProject.FullProjectPath, ct);
+
+        if (infrastructureProject != null && domainProject != null)
+            await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, infrastructureProject.FullProjectPath, domainProject.FullProjectPath, ct);
     }
 }

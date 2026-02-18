@@ -8,6 +8,7 @@ public class ProjectGenerationOptions
     public string? Options { get; set; }
     public bool IsTestProject { get; set; } = false;
     public string TargetDirectory => targetDirectory;
+    public string Framework { get; set; } = "net8.0";
 
     private readonly string targetDirectory;
 
@@ -26,4 +27,6 @@ public class ProjectGenerationOptions
     public string ProjectDirectory => IsTestProject 
         ? Path.Combine(targetDirectory, "tests") 
         : Path.Combine(targetDirectory, "src");
+
+    public string FullProjectPath => Path.Combine(ProjectDirectory, ProjectName, $"{ProjectName}.csproj");
 }

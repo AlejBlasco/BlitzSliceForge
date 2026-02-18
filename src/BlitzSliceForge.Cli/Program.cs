@@ -1,4 +1,5 @@
 ﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Services;
 using System.CommandLine;
 
 namespace BlitzSliceForge.Cli;
@@ -39,6 +40,9 @@ class Program
                     SolutionName = name!,
                     OutputDirectory = output!
                 };
+
+                var sdkCheckerService = new SdkCheckerService(cliService);
+                await sdkCheckerService.HasSdkAsync("9");
 
                 await solutionGenerator.GenerateAsync(options, ct);
             }

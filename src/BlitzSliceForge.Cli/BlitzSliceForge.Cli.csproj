@@ -9,12 +9,25 @@
     <!--Tool properties-->
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>bsf</ToolCommandName>           
-    <PackageOutputPath>..\..\pack</PackageOutputPath>
-    <Version>0.0.1-mvp</Version>
+    <Version>0.0.1</Version>
     <Authors>A. Blasco</Authors>
     <Description>Fast .NET scaffolder for Blazor + CQRS + Vertical Slice Architecture solutions</Description>
     <PackageId>BlitzSliceForge.Cli</PackageId>
+	<NoDefaultExcludes>true</NoDefaultExcludes>
+
+	  <!-- Importante: fuerza que se empaquete como tool ejecutable -->
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	  <!-- opcional, evita pack automático -->
+	  <IncludeBuildOutput>true</IncludeBuildOutput>
+	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
   </PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="$(OutputPath)$(AssemblyName).exe">
+			<Pack>true</Pack>
+			<PackagePath>tools/$(TargetFramework)/any/$(ToolCommandName).exe</PackagePath>
+		</Content>
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
@@ -23,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\Common\.gitignore">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\Common\Directory.Build.props">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
