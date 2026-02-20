@@ -1,9 +1,11 @@
-﻿<p align="center">
+﻿[![CI - Build and Test](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml)
+
+<p align="center">
   <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 9" />
   <img src="https://img.shields.io/badge/Blazor-Interactive-6C3FC5?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor" />
   <img src="https://img.shields.io/badge/Architecture-Vertical%20Slice-0078D4?style=for-the-badge" alt="Vertical Slice" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
-  <img src="https://img.shields.io/badge/Version-0.0.1-orange?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-0.0.1-orange?style=for-the-badge" alt="Version" />  
 </p>
 
 # ⚡ BlitzSliceForge
