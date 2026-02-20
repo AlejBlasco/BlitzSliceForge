@@ -26,7 +26,7 @@ jobs:
               run: dotnet build --no-restore --configuration Release
             
             - name : Run tests
-              run: dotnet test --no-build --verbosity normal --logger "console;verbosity=detailed"
+              run: dotnet test --no-build --logger "console;verbosity=detailed"
 
             - name: Pack CLI (verify that it can be packed)
               run: dotnet pack src/BlitzSliceForge.Cli -c Release --no-build -o artifacts
