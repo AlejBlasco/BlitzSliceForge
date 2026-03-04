@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/src"          # Code projects
+    schedule:
+      interval: "weekly"
+    groups:
+      security-updates:
+        patterns: ["*"]
+        update-types: ["patch", "minor"]
+      production:
+        dependency-type: "production"
+  - package-ecosystem: "nuget"
+    directory: "/tests"        # Test projects
+    schedule:
+      interval: "weekly"
+    groups:
+      security-updates:
+        patterns: ["*"]
+        update-types: ["patch", "minor"]
+      production:
+        dependency-type: "production"
