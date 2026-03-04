@@ -9,7 +9,7 @@
     <!--Tool properties-->
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>bsf</ToolCommandName>           
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
     <Authors>A. Blasco</Authors>
     <Description>Fast .NET scaffolder for Blazor + CQRS + Vertical Slice Architecture solutions</Description>
     <PackageId>BlitzSliceForge.Cli</PackageId>
