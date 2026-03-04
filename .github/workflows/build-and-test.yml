@@ -25,5 +25,6 @@ jobs:
             - name: Build the solution
               run: dotnet build --no-restore --configuration Release
 
+            - name: Run Code Analysis (linting)
+              run: dotnet build --no-restore --configuration Release -p:RunAnalyzersDuringBuild=true -p:TreatWarningsAsErrors=true
                 
-        

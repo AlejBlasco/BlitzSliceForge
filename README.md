@@ -1,21 +1,26 @@
-﻿[![CI - Build and Test](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml)
+<div align="center">
+
+[![CI - Build and Test](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/build-and-test.yml)
 [![Dependencies audited](https://img.shields.io/badge/Dependencies-Audited-success?style=flat-square&logo=dependabot&logoColor=white)](https://github.com/AlejBlasco/BlitzSliceForge/security/dependabot)
 [![Security: Dependabot](https://img.shields.io/badge/Security-Dependabot%20enabled-025E8C?style=flat-square&logo=dependabot&logoColor=white)](https://github.com/AlejBlasco/BlitzSliceForge/security/dependabot)
 [![Vulnerabilities checked](https://img.shields.io/badge/Vulnerabilities-Checked%20with%20dotnet-success?style=flat-square)](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/nuget-security-scan.yml)
+[![.NET Analyzers](https://img.shields.io/badge/.NET%20Analyzers-enabled-success?style=flat-square&logo=.net)](https://github.com/AlejBlasco/BlitzSliceForge/actions/workflows/ci.yml)
 
-<p align="center">  
-  <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 9" />
-  <img src="https://img.shields.io/badge/Blazor-Interactive-6C3FC5?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor" />
-  <img src="https://img.shields.io/badge/Architecture-Vertical%20Slice-0078D4?style=for-the-badge" alt="Vertical Slice" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
-  <img src="https://img.shields.io/badge/Version-0.0.1-orange?style=for-the-badge" alt="Version" />  
-</p>
+</div>
 
 # ⚡ BlitzSliceForge
 
 > **Fast .NET scaffolder for Blazor + CQRS + Vertical Slice Architecture solutions**
 
 BlitzSliceForge (`bsf`) is a CLI tool that scaffolds a fully structured .NET 9 solution following **Clean Architecture** and **Vertical Slice** principles in seconds. Stop wasting time creating projects, linking references, and setting up folder structures manually — let `bsf` do the heavy lifting.
+
+<p align="center">  
+  <img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 9" />
+  <img src="https://img.shields.io/badge/Blazor-Interactive-6C3FC5?style=for-the-badge&logo=blazor&logoColor=white" alt="Blazor" />
+  <img src="https://img.shields.io/badge/Architecture-Vertical%20Slice-0078D4?style=for-the-badge" alt="Vertical Slice" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/Version-0.1.0-orange?style=for-the-badge" alt="Version" />  
+</p>
 
 ---
 
