@@ -6,11 +6,11 @@ Proposed
 
 ## Implemented in
 
-[Issue #011](https://github.com/AlejBlasco/BlitzSliceForge/issues/11)
+[Issue #XX](https://github.com/AlejBlasco/BlitzSliceForge/issues/XX)
 
 ## Author
 
-[Alex Blasco]
+[Author Name]
 
 ## Context
 
@@ -37,10 +37,35 @@ When executed inside a valid BlitzSliceForge solution, this command will:
     - `Commands/`, `Queries/`, `Validators/`, `Dtos/`
   - `src/{SolutionName}.Web/Features/{FeatureName}/`
     - `Pages/`, `Components/`
+    ```
 - Use a hardcoded template based on one example feature ("Product").
 - Perform simple string replacement for renaming.
 - Validate that the command is run inside a valid solution folder.
 - Show clear error messages if not in a valid BlitzSliceForge project.
+
+```bash
+src/{SolutionName}.Application/
+└── Features/
+    └── {FeatureName}/
+        ├── Commands/
+        │   ├── Create{FeatureName}Command.cs
+        │   └── Create{FeatureName}CommandHandler.cs
+        ├── Queries/
+        │   ├── Get{FeatureName}ByIdQuery.cs
+        │   └── Get{FeatureName}ByIdQueryHandler.cs
+        ├── Validators/
+        └── Dtos/
+
+src/{SolutionName}.Web/
+└── Features/
+    └── {FeatureName}/
+        ├── Pages/
+        │   ├── Index.razor
+        │   ├── Create.razor
+        │   └── Edit.razor
+        └── Components/
+            └── {FeatureName}Card.razor
+```
 
 ## Alternatives Considered
 
