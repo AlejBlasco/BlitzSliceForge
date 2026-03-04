@@ -24,6 +24,7 @@ BlitzSliceForge (`bsf`) is a CLI tool that scaffolds a fully structured .NET 9 s
 - 🧪 **Test projects included** — test projects created and linked for every layer
 - 📁 **Opinionated folder layout** — `src/`, `tests/`, `docs/adr/`, `docker/`, `.github/workflows/`
 - 📄 **Common files** — `.gitignore`, `global.json`, `Directory.Build.props`, and `README.md` auto-generated
+- ⚙️ **Framework selection** — choose target .NET version (e.g., net8.0, net9.0) with a simple parameter
 - 🔍 **SDK validation** — verifies the required .NET SDK is installed before scaffolding
 - 📦 **Distributed as a .NET tool** — install globally and use anywhere
 
@@ -51,10 +52,11 @@ Uso:
   BlitzSliceForge.Cli [opciones]
 
 Opciones:
-  -n, --name <name> (REQUERIDO)  Name of the solution
-  -o, --output <output>          Output path (default: solution name)
-  -?, -h, --help                 Mostrar ayuda e información de uso
-  --version                      Mostrar información de la versión
+  -n, --name <name> (REQUERIDO)    Name of the solution
+  -f, --framework <net8|net9>  Target .NET framework version (e.g. net8)
+  -o, --output <output>            Output path (default: solution name)
+  -?, -h, --help                   Mostrar ayuda e información de uso
+  --version                        Mostrar información de la versión
 ```
 
 ### Uninstall
@@ -75,6 +77,11 @@ bsf --name MyAwesomeApp
 
 This creates a solution named `MyAwesomeApp` in a folder with the same name in the current directory.
 
+### Generate a solution with a specific .NET framework
+```bash
+bsf --name MyAwesomeApp --framework net8
+```
+
 ### Specify a custom output directory
 
 ```bash
@@ -86,6 +93,7 @@ bsf --name MyAwesomeApp --output C:/Projects/MyAwesomeApp
 | Option | Alias | Description | Required |
 |---|---|---|---|
 | `--name` | `-n` | Name of the solution | ✅ Yes |
+| `--framework` | `-f` | Target .NET framework version (e.g. net8) | ❌ No |
 | `--output` | `-o` | Output path (defaults to solution name) | ❌ No |
 
 ---
@@ -175,6 +183,7 @@ timeline
 | Common templates (`.gitignore`, `global.json`, etc.) | ✅ Done |
 | .NET SDK validation | ✅ Done |
 | Global .NET tool distribution | ✅ Done |
+| Framwork selection | ✅ Done |
 
 ### Next Steps 🔮
 
@@ -237,7 +246,8 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ---
 
-<p align="center">
-  Made with ⚡ by <a href="https://github.com/AlejBlasco">A. Blasco</a>
-</p>
+## Architectural Decisions
 
+All important decisions are documented in [docs/adr/](docs/adr/)
+
+- [ADR 001: Support for Multiple .NET Framework Versions](docs/adr/001-support-multiple-dotnet-frameworks.md)

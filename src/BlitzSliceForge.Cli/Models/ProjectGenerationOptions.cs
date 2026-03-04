@@ -8,16 +8,17 @@ public class ProjectGenerationOptions
     public string? Options { get; set; }
     public bool IsTestProject { get; set; } = false;
     public string TargetDirectory => targetDirectory;
-    public string Framework { get; set; } = "net8.0";
+    public string Framework { get; set; } = string.Empty;
 
     private readonly string targetDirectory;
 
-    public ProjectGenerationOptions(string solutionName, string suffix, string template, string targetDirectory, bool isTestProject = false, string? options = null)
+    public ProjectGenerationOptions(string solutionName, string suffix, string template, string targetDirectory, string framework, bool isTestProject = false, string? options = null)
     {
         SolutionName = solutionName;
         Suffix = suffix;
         Template = template;
         IsTestProject = isTestProject;
+        Framework = framework;
         Options = options;
         this.targetDirectory = targetDirectory;
     }

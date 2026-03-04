@@ -10,12 +10,29 @@ public class SdkCheckerService
             ?? throw new ArgumentNullException(nameof(cliService));
     }
 
-    public async Task<bool> HasSdkAsync(string targetFramework, CancellationToken ct = default)
+    public async Task<bool> ValidateFrameworkAsync(string framework, CancellationToken ct)
     {
-        var sdks = await GetInstalledSdkVersionsAsync(ct);
-        var majorMinor = targetFramework.Replace("net", "");
+        var installedSdks = await GetInstalledSdkVersionsAsync(ct);
 
-        return sdks.Any(v => v.StartsWith(majorMinor));
+        var requiredMajorMinor = framework.Replace("net", ""); // net8.0 → "8.0"
+
+        if (!installedSdks.Any(v => v.StartsWith(requiredMajorMinor + ".")))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nError: SDK .NET {framework} not installed.");
+            Console.WriteLine($"Detected SDKs:");
+            foreach (var sdk in installedSdks)
+                Console.WriteLine($"  - {sdk}");
+
+            Console.WriteLine($"\nTo use --framework {framework}, you need to install the corresponding SDK:");
+            Console.WriteLine($"→ https://dotnet.microsoft.com/download/dotnet/{requiredMajorMinor}");
+            Console.WriteLine("\nOnce installed, please rerun the command.\n");
+            Console.ResetColor();
+
+            return false;
+        }
+
+        return true;
     }
 
     private async Task<List<string>> GetInstalledSdkVersionsAsync(CancellationToken ct = default)

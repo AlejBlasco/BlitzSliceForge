@@ -20,36 +20,36 @@ public static class ProjectTemplate
 
     private static ProjectGenerationOptions GetDomainProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Domain", "classlib", generationOptions.OutputDirectory!, false, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Domain", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
     }
 
     private static ProjectGenerationOptions GetApplicationProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, false, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
     }
 
     private static ProjectGenerationOptions GetInfrastructureProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Infrastructure", "classlib", generationOptions.OutputDirectory!, false, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Infrastructure", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
     }
 
     private static ProjectGenerationOptions GetBlazorProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Web", "blazor", generationOptions.OutputDirectory!, false, "--interactivity Auto");
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Web", "blazor", generationOptions.OutputDirectory!, generationOptions.Framework, false, "--interactivity Auto");
     }
 
     private static ProjectGenerationOptions GetDomainTestsProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Domain", "classlib", generationOptions.OutputDirectory!, true, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Domain", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, true, null);
     }
 
     private static ProjectGenerationOptions GetApplicationTestsProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, true, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, true, null);
     }
 
     private static ProjectGenerationOptions GetInfrastructureTestsProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Infrastructure", "classlib", generationOptions.OutputDirectory!, true, null);
+        return new ProjectGenerationOptions(generationOptions.SolutionName, "Infrastructure", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, true, null);
     }
 }
