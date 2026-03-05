@@ -1,4 +1,4 @@
-﻿# ADR-002: Implement add feature command
+# ADR-002: Implement add feature command
 
 ## Status
 
@@ -6,11 +6,11 @@ Proposed
 
 ## Implemented in
 
-[Issue #XX](https://github.com/AlejBlasco/BlitzSliceForge/issues/XX)
+[Issue #011](https://github.com/AlejBlasco/BlitzSliceForge/issues/11)
 
 ## Author
 
-[Author Name]
+A.Blasco
 
 ## Context
 
