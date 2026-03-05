@@ -1,0 +1,26 @@
+using MediatR;
+using Microsoft.Extensions.Logging;
+using {{ SolutionName }}.Shared.{{ FeatureName }};
+
+namespace {{ SolutionName }}.Application.Features.{{ FeatureName }}.Commands;
+
+public record Create{{ FeatureName }}Command({{ FeatureName }}Dto {{ FeatureName }}) : IRequest<{{ FeatureName }}Dto?>;
+
+public class Create{{ FeatureName }}CommandHandler : IRequestHandler<Create{{ FeatureName }}Command, {{ FeatureName }}Dto?>
+{
+    private readonly ILogger<Create{{ FeatureName }}CommandHandler> logger;
+
+    public Create{{ FeatureName }}CommandHandler(ILogger<Create{{ FeatureName }}CommandHandler> logger)
+    {
+        this.logger = logger
+            ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    public Task<{{ FeatureName }}Dto?> Handle(Create{{ FeatureName }}Command request, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Handling Create{{ FeatureName }}Command for {{ FeatureName }}: {@{{ FeatureName }}}", request.{{ FeatureName }});
+
+        // TODO: Implement data access logic to create the entity
+        throw new NotImplementedException();
+    }
+}

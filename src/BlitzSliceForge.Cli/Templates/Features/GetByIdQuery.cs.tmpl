@@ -1,0 +1,26 @@
+using MediatR;
+using Microsoft.Extensions.Logging;
+using {{ SolutionName }}.Shared.{{ FeatureName }};
+
+namespace {{ SolutionName }}.Application.Features.{{ FeatureName }}.Queries;
+
+public record Get{{ FeatureName }}ByIdQuery(int Id) : IRequest<{{ FeatureName }}Dto?>;
+
+public class Get{{ FeatureName }}ByIdQueryHandler : IRequestHandler<Get{{ FeatureName }}ByIdQuery, {{ FeatureName }}Dto?>
+{
+    private readonly ILogger<Get{{ FeatureName }}ByIdQueryHandler> logger;
+
+    public Get{{ FeatureName }}ByIdQueryHandler(ILogger<Get{{ FeatureName }}ByIdQueryHandler> logger)
+    {
+        this.logger = logger
+            ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    public Task<{{ FeatureName }}Dto?> Handle(Get{{ FeatureName }}ByIdQuery request, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Handling Get{{ FeatureName }}ByIdQuery for Id: {Id}", request.Id);
+
+        // TODO: Implement data access logic to retrieve the entity by Id
+        throw new NotImplementedException();
+    }
+}

@@ -1,4 +1,4 @@
-﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Models;
 
 namespace BlitzSliceForge.Cli.Templates.Project;
 
@@ -12,6 +12,7 @@ public static class ProjectTemplate
             GetApplicationProject(generationOptions),
             GetInfrastructureProject(generationOptions),
             GetBlazorProject(generationOptions),
+            GetSharedProject(generationOptions),
             GetDomainTestsProject(generationOptions),
             GetApplicationTestsProject(generationOptions),
             GetInfrastructureTestsProject(generationOptions)
@@ -25,7 +26,10 @@ public static class ProjectTemplate
 
     private static ProjectGenerationOptions GetApplicationProject(GenerationOptions generationOptions)
     {
-        return new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
+        var projectOptions = new ProjectGenerationOptions(generationOptions.SolutionName, "Application", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
+        projectOptions.Packages = new[] { "MediatR" };
+
+        return projectOptions;
     }
 
     private static ProjectGenerationOptions GetInfrastructureProject(GenerationOptions generationOptions)
@@ -36,6 +40,13 @@ public static class ProjectTemplate
     private static ProjectGenerationOptions GetBlazorProject(GenerationOptions generationOptions)
     {
         return new ProjectGenerationOptions(generationOptions.SolutionName, "Web", "blazor", generationOptions.OutputDirectory!, generationOptions.Framework, false, "--interactivity Auto");
+    }
+
+    private static ProjectGenerationOptions GetSharedProject(GenerationOptions generationOptions)
+    {
+        var projectOptions = new ProjectGenerationOptions(generationOptions.SolutionName, "Shared", "classlib", generationOptions.OutputDirectory!, generationOptions.Framework, false, null);
+        projectOptions.Packages = new[] { "FluentValidation" };
+        return projectOptions;  
     }
 
     private static ProjectGenerationOptions GetDomainTestsProject(GenerationOptions generationOptions)

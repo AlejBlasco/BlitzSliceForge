@@ -22,6 +22,24 @@
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
   </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="Templates\\Features\\GetByIdQuery.cs.tmpl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Templates\\Features\\CreateCommand.cs.tmpl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Templates\\Features\\EditCommand.cs.tmpl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Templates\\Features\\DeleteCommand.cs.tmpl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="Templates\\Features\\Dto.cs.tmpl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 	<ItemGroup>
 		<Content Include="$(OutputPath)$(AssemblyName).exe">
 			<Pack>true</Pack>
@@ -48,6 +66,12 @@
     </None>
     <None Update="Templates\Common\README-Template.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Features\DeleteCommand.cs.tmpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Features\EditCommand.cs.tmpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

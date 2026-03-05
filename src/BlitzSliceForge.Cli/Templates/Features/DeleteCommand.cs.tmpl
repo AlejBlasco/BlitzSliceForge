@@ -1,0 +1,26 @@
+using MediatR;
+using Microsoft.Extensions.Logging;
+using {{ SolutionName }}.Shared.{{ FeatureName }};
+
+namespace {{ SolutionName }}.Application.Features.{{ FeatureName }}.Commands;
+
+public record Delete{{ FeatureName }}Command(int Id) : IRequest<Unit>;
+
+public class Delete{{ FeatureName }}CommandHandler : IRequestHandler<Delete{{ FeatureName }}Command, Unit>
+{
+    private readonly ILogger<Delete{{ FeatureName }}CommandHandler> logger;
+
+    public Delete{{ FeatureName }}CommandHandler(ILogger<Delete{{ FeatureName }}CommandHandler> logger)
+    {
+        this.logger = logger
+            ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    public Task<Unit> Handle(Delete{{ FeatureName }}Command request, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Handling Delete{{ FeatureName }}Command for {{ FeatureName }} with Id: {Id}", request.Id);
+
+        // TODO: Implement data access logic to Delete the entity
+        throw new NotImplementedException();
+    }
+}

@@ -1,4 +1,4 @@
-﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
 
 namespace BlitzSliceForge.Cli.Generators;
@@ -43,6 +43,16 @@ public class ProjectGenerator
 
         // Link the project to the solution
         await cliService.RunAsync($"dotnet sln add {options.ProjectDirectory}/{options.ProjectName}/{options.ProjectName}.csproj", options.TargetDirectory);
+
+        // Add any additional NuGet packages if specified
+        if (options.Packages != null && options.Packages.Any())
+        {
+            foreach(var package in options.Packages)
+            {
+                Console.WriteLine($"Adding package {package} to project {options.ProjectName}...");
+                await cliService.RunAsync($"dotnet add {Path.Combine(options.ProjectDirectory, options.ProjectName, options.ProjectName)}.csproj package {package}", options.ProjectDirectory);
+            }
+        }
     }
 
     public async Task AddProjectReferenceAsync(string workingDirectory, string referencingCsprojPath, string referencedCsprojPath, CancellationToken ct = default)

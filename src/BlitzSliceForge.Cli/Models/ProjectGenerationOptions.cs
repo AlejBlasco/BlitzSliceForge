@@ -1,4 +1,4 @@
-﻿namespace BlitzSliceForge.Cli.Models;
+namespace BlitzSliceForge.Cli.Models;
 
 public class ProjectGenerationOptions
 {
@@ -9,6 +9,7 @@ public class ProjectGenerationOptions
     public bool IsTestProject { get; set; } = false;
     public string TargetDirectory => targetDirectory;
     public string Framework { get; set; } = string.Empty;
+    public string[]? Packages { get; set; }
 
     private readonly string targetDirectory;
 

@@ -1,4 +1,4 @@
-﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
 using BlitzSliceForge.Cli.Templates.Project;
 
@@ -40,6 +40,16 @@ public class SolutionGenerator
 
         // Generate projects
         await GenerateProjetcs(options, ct);
+
+        // Generate features
+        if (options.Features != null && options.Features.Length > 0)
+        {
+            var featureGenerator = new FeatureGenerator();
+            foreach (var feature in options.Features)
+            {
+                await featureGenerator.AddFeatureAsync(feature, options);
+            }
+        }
     }
 
     private void GeneratePrincipalFolders(string targetDir)
@@ -90,11 +100,18 @@ public class SolutionGenerator
         var applicationProject = projects.FirstOrDefault(p => p.Suffix == "Application");
         var domainProject = projects.FirstOrDefault(p => p.Suffix == "Domain");
         var infrastructureProject = projects.FirstOrDefault(p => p.Suffix == "Infrastructure");
+        var sharedProject = projects.FirstOrDefault(p => p.Suffix == "Shared");
+        var blazorProject = projects.FirstOrDefault(p => p.Suffix == "Blazor");
+
+        if (blazorProject != null && sharedProject != null)
+            await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, blazorProject.FullProjectPath, sharedProject.FullProjectPath, ct);
 
         if (applicationProject != null && domainProject != null)
             await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, applicationProject.FullProjectPath, domainProject.FullProjectPath, ct);
         if (applicationProject != null && infrastructureProject != null)
             await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, applicationProject.FullProjectPath, infrastructureProject.FullProjectPath, ct);
+        if (applicationProject != null && sharedProject != null)
+            await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, applicationProject.FullProjectPath, sharedProject.FullProjectPath, ct);
 
         if (infrastructureProject != null && domainProject != null)
             await projectGenerator.AddProjectReferenceAsync(options.OutputDirectory!, infrastructureProject.FullProjectPath, domainProject.FullProjectPath, ct);

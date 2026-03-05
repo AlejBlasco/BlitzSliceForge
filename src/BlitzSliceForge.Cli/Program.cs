@@ -1,4 +1,4 @@
-﻿using BlitzSliceForge.Cli.Enums;
+using BlitzSliceForge.Cli.Enums;
 using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
 using System.CommandLine;
@@ -29,15 +29,28 @@ static class Program
             Arity = ArgumentArity.ZeroOrOne
         };
 
+        Option<string> featuresOption = new("--features", "-ft")
+        {
+            Description = "Comma-separated list of features to include",
+            AllowMultipleArgumentsPerToken = true,
+            Arity = ArgumentArity.ZeroOrOne
+        };
+
         rootCommand.Options.Add(nameOption);
         rootCommand.Options.Add(frameworkOption);
         rootCommand.Options.Add(outputOption);
+        rootCommand.Options.Add(featuresOption);
 
         rootCommand.SetAction(async (ParseResult parseResult, CancellationToken ct) =>
         {
+
+            //TODO: Add validation for output path and solution name (e.g. invalid chars, reserved names, etc.)
+            //TODO: Add validation for features (e.g. check if the provided features are not empty, contain invalid chars, etc.)
+
             string? name = parseResult.GetValue(nameOption);
             AvailableFrameworksEnum framework = parseResult.GetValue(frameworkOption);
             string? output = parseResult.GetValue(outputOption)?.FullName ?? name;
+            string[]? features = parseResult.GetValue(featuresOption)?.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
             if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(output))
             {
@@ -49,7 +62,8 @@ static class Program
                 {
                     SolutionName = name!,
                     OutputDirectory = output!,
-                    Framework = framework.ToFrameworkString()
+                    Framework = framework.ToFrameworkString(),
+                    Features = features
                 };
 
                 SdkCheckerService sdkChecker = new(cliService);

@@ -1,4 +1,4 @@
-﻿using Scriban;
+using Scriban;
 
 namespace BlitzSliceForge.Cli.Services
 {
@@ -27,7 +27,7 @@ namespace BlitzSliceForge.Cli.Services
                 return;
             }
 
-            var rendered = await template.RenderAsync(model);
+            var rendered = await template.RenderAsync(model, member => member.Name);
 
             ct.ThrowIfCancellationRequested();
 

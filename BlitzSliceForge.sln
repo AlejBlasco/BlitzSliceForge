@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{3046A7E5-842
 	ProjectSection(SolutionItems) = preProject
 		docs\adr\000-adr-template.md = docs\adr\000-adr-template.md
 		docs\adr\001-support-multiple-dotnet-frameworks.md = docs\adr\001-support-multiple-dotnet-frameworks.md
+		docs\adr\002-Implement-add-feature.md = docs\adr\002-Implement-add-feature.md
 	EndProjectSection
 EndProject
 Global

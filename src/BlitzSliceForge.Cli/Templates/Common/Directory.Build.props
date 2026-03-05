@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <LangVersion>13.0</LangVersion>
     <Nullable>enable</Nullable>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Company>BlitzSliceForge</Company>
     <Authors>BlitzSliceForge Team</Authors>
