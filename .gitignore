@@ -416,3 +416,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+# Claude
+CLAUDE.md
+.claude/*/*.md

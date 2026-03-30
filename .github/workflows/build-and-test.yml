@@ -17,7 +17,7 @@ jobs:
             - name: Set up .NET
               uses: actions/setup-dotnet@v4
               with:
-                dotnet-version: '8.0.x' # Use the latest .NET 8.0 SDK
+                dotnet-version: '9.0.x' # Use the latest .NET 9.0 SDK
 
             - name: Restore dependencies
               run: dotnet restore
@@ -27,4 +27,13 @@ jobs:
 
             - name: Run Code Analysis (linting)
               run: dotnet build --no-restore --configuration Release -p:RunAnalyzersDuringBuild=true -p:TreatWarningsAsErrors=true
-                
+
+            - name: Run unit tests
+              run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                name: coverage-report
+                path: ./coverage

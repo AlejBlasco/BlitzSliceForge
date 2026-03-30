@@ -1,17 +1,25 @@
-﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
 using BlitzSliceForge.Cli.Templates.Project;
 
 namespace BlitzSliceForge.Cli.Generators;
 
+/// <summary>
+/// Orchestrates full solution scaffolding: folder structure, templates, projects and references.
+/// </summary>
 public class SolutionGenerator
 {
-    private readonly DotNetCliService cliService;
-    private readonly TemplateRendererService templateRenderer;
-
+    private readonly IDotNetCliService cliService;
+    private readonly ITemplateRendererService templateRenderer;
     private readonly ProjectGenerator projectGenerator;
 
-    public SolutionGenerator(DotNetCliService cliService, TemplateRendererService templateRenderer)
+    /// <summary>
+    /// Initialises a new <see cref="SolutionGenerator"/>.
+    /// </summary>
+    /// <param name="cliService">CLI service used to run dotnet commands.</param>
+    /// <param name="templateRenderer">Renderer used to produce files from Scriban templates.</param>
+    /// <exception cref="ArgumentNullException">Thrown when any dependency is null.</exception>
+    public SolutionGenerator(IDotNetCliService cliService, ITemplateRendererService templateRenderer)
     {
         this.cliService = cliService
             ?? throw new ArgumentNullException(nameof(cliService));
@@ -22,6 +30,9 @@ public class SolutionGenerator
         this.projectGenerator = new ProjectGenerator(cliService);
     }
 
+    /// <summary>
+    /// Generates the complete solution structure for the given <paramref name="options"/>.
+    /// </summary>
     public async Task GenerateAsync(GenerationOptions options, CancellationToken ct = default)
     {
         Console.WriteLine($"Generating solution: {options.SolutionName} in {options.OutputDirectory} ...");
@@ -70,7 +81,7 @@ public class SolutionGenerator
 
         await templateRenderer.RenderAndSaveAsync(Path.Combine(commonTemplatesPath, "README-Template.md"),
             Path.Combine(options.OutputDirectory!, "README.md"),
-             new Dictionary<string, object>
+            new Dictionary<string, object>
             {
                 { "SolutionName", options.SolutionName }
             },
@@ -79,14 +90,14 @@ public class SolutionGenerator
 
     private async Task GenerateProjetcs(GenerationOptions options, CancellationToken ct = default)
     {
-        // Minimun projects
+        // Minimum projects
         var projects = ProjectTemplate.GetAvailableProjects(options);
         foreach (var project in projects)
         {
             await projectGenerator.CreateProjectAsync(project, ct);
         }
 
-        // Linking projects to others   
+        // Linking projects to others
         var applicationProject = projects.FirstOrDefault(p => p.Suffix == "Application");
         var domainProject = projects.FirstOrDefault(p => p.Suffix == "Domain");
         var infrastructureProject = projects.FirstOrDefault(p => p.Suffix == "Infrastructure");

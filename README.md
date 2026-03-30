@@ -60,9 +60,9 @@ Uso:
   BlitzSliceForge.Cli [opciones]
 
 Opciones:
-  -n, --name <name> (REQUERIDO)    Name of the solution
+  -n, --name <n> (REQUERIDO)    Name of the solution
   -f, --framework <net8|net9>  Target .NET framework version (e.g. net8)
-  -o, --output <output>            Output path (default: solution name)
+  -o, --output <o>            Output path (default: solution name)
   -?, -h, --help                   Mostrar ayuda e información de uso
   --version                        Mostrar información de la versión
 ```
@@ -106,7 +106,7 @@ bsf --name MyAwesomeApp --output C:/Projects/MyAwesomeApp
 
 ---
 
-## 🏗️ Generated Structure (Work in Progress))
+## 🏗️ Generated Structure
 
 When you run `bsf --name MyAwesomeApp`, the following structure is generated:
 
@@ -133,7 +133,7 @@ MyAwesomeApp/
 └── MyAwesomeApp.sln
 ```
 
-### Project References (Work in Progress))
+### Project References
 
 The generated projects are automatically linked following Clean Architecture dependency rules:
 
@@ -191,7 +191,8 @@ timeline
 | Common templates (`.gitignore`, `global.json`, etc.) | ✅ Done |
 | .NET SDK validation | ✅ Done |
 | Global .NET tool distribution | ✅ Done |
-| Framwork selection | ✅ Done |
+| Framework selection | ✅ Done |
+| Unit tests for CLI core logic | ✅ Done |
 
 ### Next Steps 🔮
 
@@ -228,10 +229,31 @@ dotnet tool install --global --add-source ./src/BlitzSliceForge.Cli/nupkg BlitzS
 
 ---
 
-## 🧪 Running Tests (Work in Progress))
+## 🧪 Running Tests
 
 ```bash
 dotnet test
+```
+
+The test suite covers the core logic of `BlitzSliceForge.Cli` using **xUnit**, **Moq** and **FluentAssertions**.
+
+### Test coverage
+
+| Area | Test class | What is verified |
+|---|---|---|
+| Enums | `AvailableFrameworksEnumExtensionsTests` | TFM string mapping, out-of-range exception |
+| Models | `GenerationOptionsTests` | Default values, property assignment |
+| Models | `ProjectGenerationOptionsTests` | `ProjectName`, `ProjectDirectory`, `FullProjectPath` computed properties |
+| Services | `DotNetCliResponseTests` | Constructor, `GetOutputLines` with empty / Unix / Windows / mixed line endings |
+| Services | `SdkCheckerServiceTests` | Null guard, SDK found → `true`, not found → `false`, CLI called once |
+| Services | `TemplateRendererServiceTests` | Missing template, static render, model interpolation, cancellation |
+| Generators | `ProjectTemplateTests` | Project count, src/tests layout, framework propagation, Blazor options |
+| Generators | `ProjectGeneratorTests` | Null guard, CLI invocation count, directory creation, reference linking |
+
+### Run with coverage
+
+```bash
+dotnet test --collect:"XPlat Code Coverage"
 ```
 
 ---
