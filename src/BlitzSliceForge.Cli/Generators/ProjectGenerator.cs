@@ -1,18 +1,29 @@
-﻿using BlitzSliceForge.Cli.Models;
+using BlitzSliceForge.Cli.Models;
 using BlitzSliceForge.Cli.Services;
 
 namespace BlitzSliceForge.Cli.Generators;
 
+/// <summary>
+/// Creates individual .NET projects and links them to the solution.
+/// </summary>
 public class ProjectGenerator
 {
-    private readonly DotNetCliService cliService;
+    private readonly IDotNetCliService cliService;
 
-    public ProjectGenerator(DotNetCliService cliService)
+    /// <summary>
+    /// Initialises a new <see cref="ProjectGenerator"/>.
+    /// </summary>
+    /// <param name="cliService">CLI service used to run dotnet commands.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="cliService"/> is null.</exception>
+    public ProjectGenerator(IDotNetCliService cliService)
     {
         this.cliService = cliService
             ?? throw new ArgumentNullException(nameof(cliService));
     }
 
+    /// <summary>
+    /// Scaffolds a new project from a dotnet template and adds it to the solution.
+    /// </summary>
     public async Task CreateProjectAsync(ProjectGenerationOptions options, CancellationToken ct = default)
     {
         // Ensure the project directory exists
@@ -33,7 +44,7 @@ public class ProjectGenerator
         if (File.Exists(defaultClassFilePath))
             File.Delete(defaultClassFilePath);
 
-        // Clean up any extra solution files that may have been created in the project directory (e.g., from nested templates)
+        // Clean up any extra solution files that may have been created in the project directory
         foreach (var solutionFile in Directory.GetFiles(options.ProjectDirectory, "*.sln", SearchOption.TopDirectoryOnly)
                                              .Concat(Directory.GetFiles(options.ProjectDirectory, "*.slnx", SearchOption.AllDirectories)))
         {
@@ -45,6 +56,9 @@ public class ProjectGenerator
         await cliService.RunAsync($"dotnet sln add {options.ProjectDirectory}/{options.ProjectName}/{options.ProjectName}.csproj", options.TargetDirectory);
     }
 
+    /// <summary>
+    /// Adds a project-to-project reference between two <c>.csproj</c> files.
+    /// </summary>
     public async Task AddProjectReferenceAsync(string workingDirectory, string referencingCsprojPath, string referencedCsprojPath, CancellationToken ct = default)
     {
         if (File.Exists(referencingCsprojPath) && File.Exists(referencedCsprojPath))

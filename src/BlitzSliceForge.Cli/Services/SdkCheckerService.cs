@@ -1,15 +1,27 @@
-﻿namespace BlitzSliceForge.Cli.Services;
+namespace BlitzSliceForge.Cli.Services;
 
+/// <summary>
+/// Verifies that the required .NET SDK is installed before scaffolding begins.
+/// </summary>
 public class SdkCheckerService
 {
-    private readonly DotNetCliService cliService;
+    private readonly IDotNetCliService cliService;
 
-    public SdkCheckerService(DotNetCliService cliService)
+    /// <summary>
+    /// Initialises a new <see cref="SdkCheckerService"/>.
+    /// </summary>
+    /// <param name="cliService">CLI service used to query installed SDKs.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="cliService"/> is null.</exception>
+    public SdkCheckerService(IDotNetCliService cliService)
     {
         this.cliService = cliService
             ?? throw new ArgumentNullException(nameof(cliService));
     }
 
+    /// <summary>
+    /// Returns <c>true</c> when the SDK matching <paramref name="framework"/> is installed;
+    /// otherwise prints a diagnostic message and returns <c>false</c>.
+    /// </summary>
     public async Task<bool> ValidateFrameworkAsync(string framework, CancellationToken ct)
     {
         var installedSdks = await GetInstalledSdkVersionsAsync(ct);
@@ -54,6 +66,4 @@ public class SdkCheckerService
 
         return sdks;
     }
-
-
 }
