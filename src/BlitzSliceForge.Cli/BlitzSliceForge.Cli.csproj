@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -13,26 +13,26 @@
     <Authors>A. Blasco</Authors>
     <Description>Fast .NET scaffolder for Blazor + CQRS + Vertical Slice Architecture solutions</Description>
     <PackageId>BlitzSliceForge.Cli</PackageId>
-	<NoDefaultExcludes>true</NoDefaultExcludes>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
 
-	  <!-- Importante: fuerza que se empaquete como tool ejecutable -->
-	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-	  <!-- opcional, evita pack automático -->
-	  <IncludeBuildOutput>true</IncludeBuildOutput>
-	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <!-- Importante: fuerza que se empaquete como tool ejecutable -->
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <!-- opcional, evita pack automático -->
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
   </PropertyGroup>
 
-	<ItemGroup>
-		<Content Include="$(OutputPath)$(AssemblyName).exe">
-			<Pack>true</Pack>
-			<PackagePath>tools/$(TargetFramework)/any/$(ToolCommandName).exe</PackagePath>
-		</Content>
-	</ItemGroup>
+  <ItemGroup>
+    <Content Include="$(OutputPath)$(AssemblyName).exe">
+      <Pack>true</Pack>
+      <PackagePath>tools/$(TargetFramework)/any/$(ToolCommandName).exe</PackagePath>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.3.3" />
     <PackageReference Include="System.CommandLine" Version="3.0.0-preview.1.26104.118" />
-    <PackageReference Include="Scriban" Version="6.5.4" />
+    <PackageReference Include="Scriban" Version="7.0.6" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-preview.1.26104.118" PrivateAssets="all" />
   </ItemGroup>
 
