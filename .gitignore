@@ -420,5 +420,4 @@ FodyWeavers.xsd
 
 # Claude
 CLAUDE.md
-.claude/*/*.md
-.claude/settings.local.json
+.claude/*

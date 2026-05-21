@@ -32,7 +32,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="18.3.3" />
     <PackageReference Include="System.CommandLine" Version="3.0.0-preview.1.26104.118" />
-    <PackageReference Include="Scriban" Version="7.0.6" />
+    <PackageReference Include="Scriban" Version="7.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-preview.1.26104.118" PrivateAssets="all" />
   </ItemGroup>
 
